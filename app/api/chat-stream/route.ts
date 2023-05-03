@@ -7,12 +7,14 @@ async function createStream(req: NextRequest) {
   const decoder = new TextDecoder();
 
   const res = await requestOpenai(req);
+  // console.log("[chats]", req.body, res.text())
 
   const contentType = res.headers.get("Content-Type") ?? "";
   if (!contentType.includes("stream")) {
-    const content = await (
-      await res.text()
-    ).replace(/provided:.*. You/, "provided: ***. You");
+    const content = (await res.text()).replace(
+      /provided:.*. You/,
+      "provided: ***. You",
+    );
     console.log("[Stream] error ", content);
     return "```json\n" + content + "```";
   }

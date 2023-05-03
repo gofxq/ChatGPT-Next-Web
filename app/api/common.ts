@@ -15,12 +15,14 @@ export async function requestOpenai(req: NextRequest) {
     baseUrl = `${PROTOCOL}://${baseUrl}`;
   }
 
-  console.log("[Proxy] ", openaiPath);
-  console.log("[Base Url]", baseUrl);
-
-  if (process.env.OPENAI_ORG_ID) {
-    console.log("[Org ID]", process.env.OPENAI_ORG_ID);
-  }
+  console.log(
+    "[Proxy] ",
+    openaiPath,
+    "[Base Url]",
+    baseUrl,
+    "[Org ID]",
+    process.env.OPENAI_ORG_ID,
+  );
 
   return fetch(`${baseUrl}/${openaiPath}`, {
     headers: {
